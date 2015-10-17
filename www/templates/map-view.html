@@ -1,0 +1,51 @@
+<ion-view>
+  <ion-header-bar class="list-bar">
+    <div class="header-logo">
+      <a nav-direction='exit' href='#/menu'><img class="title-image" src="img/kazimir_logotype.svg" /></a>
+    </div>
+    <div class="header-nav">
+      <a class='button button-icon icon custom-icon' nav-direction='enter' href='#/list-view'><img src="img/icon_list.svg"></a>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div id="map" data-tap-disabled="true" ng-controller="MapController">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="mapOptions">
+        <ui-gmap-polyline ng-repeat="s in streets" path="s.path" stroke="getStroke(s)" visible="true"></ui-gmap-polyline>
+        <ui-gmap-marker ng-if="userLocation.visible" idKey="userLocation.id"
+            coords="userLocation.coords"
+            options="userLocation.options">
+</ui-gmap-marker>
+      </ui-gmap-google-map>
+    </div>
+    <div ng-controller="MapStreetsController">
+      <div ng-if="selectedItem" class="item-label">
+        <a class="button button-icon ion-chevron-left" nav-direction="back" ng-click="singlePostOld(selectedItem)"></a>
+        <div class="selected-item">{{selectedItem.name}}</div>
+        <a class="button button-icon ion-chevron-right" nav-direction="forward" ng-click="singlePostNew(selectedItem)"></a>
+      </div>
+      <ion-content delegate-handle="mapScroll" ng-class="class" class="map-street-list">
+        <div ng-if="!selectedItem" class='map-item-kazimir' ng-click='openMapList()'>
+            <div class="map-street-item">
+              <div class="list-item-buttons">
+                <div ng-model="item" class="map-item-name">
+                  <span>{{"choose_street" | translate}}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div ng-if="!selectedItem" class='map-item-kazimir' ng-repeat='street in streets'>
+            <div class="map-street-item">
+              <div class="list-item-buttons">
+                <div ng-model="item" class="map-item-name">
+                  <span ng-click="streetSelected(street)">{{street.name}}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+      </ion-content>
+      <div ng-class="class" class='button-container m-button-container'>
+        <a class='button button-icon open-map-list' ng-click='openMapList()'><i class="icon ion-more"></i></a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

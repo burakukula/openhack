@@ -1,0 +1,30 @@
+<ion-view ng-controller="StreetsController">
+  <ion-header-bar class="list-bar">
+    <div class="header-logo">
+      <a nav-direction='exit' href='#/menu'><img class="title-image" src="img/kazimir_logotype.svg" /></a>
+    </div>
+    <div class="header-nav">
+      <a class='button button-icon icon custom-icon' nav-direction='enter' href='#/map-view'><img src="img/map_icon.svg"></a>
+    </div>
+  </ion-header-bar>
+
+  <ion-content>
+    <div>
+      <ion-list>
+        <ion-item class='item-kazimir' ng-repeat='street in streets'>
+          <div class="street-item">
+            <img ng-src="{{street.places.present[0].photos[0].images.medium}}">
+            <div class="street-cover"></div>
+            <div class="street-click-mask-old" ng-click="singlePostOld(street)"></div>
+            <div class="street-click-mask-new" ng-click="singlePostNew(street)"></div>
+            <div class="list-item-buttons">
+              <button class="button button-icon ion-chevron-left" nav-direction="forward" on-swipe="singlePostOld(street)" ng-click="singlePostOld(street)"></button>
+              <div ng-model="item" class="item-name">{{street.name}}</div>
+              <button class="button button-icon ion-chevron-right" nav-direction="back" on-swipe="singlePostNew(street)" ng-click="singlePostNew(street)"></button>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

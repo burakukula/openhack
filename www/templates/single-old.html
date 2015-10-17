@@ -1,0 +1,48 @@
+<ion-view>
+  <div>
+    <div class="bar bar-header bar-old" ng-class="headerClass">  
+      <h1 class="title">{{street.name}}</h1>
+      <a ng-show='buttonClass === "new"' class='button button-clear icon-right ion-arrow-right-c' nav-direction='forward' ng-click="myGoBackForward()"></a>
+      <a ng-show='buttonClass === "old"' class='button button-clear icon-left ion-arrow-left-c' nav-direction='back' ng-click="myGoBack()"></a>
+    </div>
+    <ion-scroll class="main-content" delegate-handle="singleScrollTop">
+      <div class='flipper'>
+        <div class='container flipped'>
+          <div class='front'> 
+            <div class="single-content" ng-if='activeView != "old"'>
+              <div ng-repeat="present in street.places.present">
+                <ion-slide-box active-slide="activeSlide" class="post-slider">
+                  <ion-slide ng-repeat="photo in present.photos" dynamic-slides="present.photos">
+                    <div class="sc-slide"><img ng-src="{{photo.images.medium}}"></div>
+                  </ion-slide>
+                </ion-slide-box>
+                <div class="sc-container">
+                  <h3 ng-bind="present.details[lang].name"></h3>
+                  <div ng-bind="present.details[lang].description"></div>
+                </div>
+              </div>
+            </div>   
+          </div>
+          <div class='back'>
+            <div class="single-content" ng-if='activeView != "new"'> 
+              <div ng-repeat="past in street.places.past">     
+                <ion-slide-box active-slide="activeSlide" class="post-slider">
+                  <ion-slide ng-repeat="photo in past.photos" dynamic-slides="past.photos">
+                    <div class="sc-slide"><img ng-src="{{photo.images.medium}}"></div>
+                  </ion-slide>
+                </ion-slide-box>
+                <div class="sc-container">
+                  <h3 ng-bind="past.details[lang].name"></h3>
+                  <div ng-bind="past.details[lang].description"></div>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
+  </div>
+  <div class='button-container'> 
+    <a class='button button-icon toggle-button' ng-class="buttonClass" id="toggleButton" ng-click='rotate()'></a>  
+  </div>
+</ion-view>

@@ -1,0 +1,8 @@
+{
+  "name": "KazimirApp",
+  "app_id": "",
+  "proxies": [{
+    "path": "/api",
+    "proxyUrl": "http://kazimirapp.pl"
+  }]
+}
