@@ -19,11 +19,351 @@ angular.module('kazimir')
     }, zoom: 15
   };
 
+  var mapStyles = [
+      {
+          "featureType": "all",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "lightness": "0"
+              }
+          ]
+      },
+      {
+          "featureType": "all",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "all",
+          "elementType": "labels.text.fill",
+          "stylers": [
+              {
+                  "color": "#ffffff"
+              }
+          ]
+      },
+      {
+          "featureType": "all",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "all",
+          "elementType": "labels.icon",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              },
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              },
+              {
+                  "weight": 1.2
+              }
+          ]
+      },
+      {
+          "featureType": "administrative",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "color": "#1a5691"
+              },
+              {
+                  "weight": "0.7"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.locality",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "lightness": "-1"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.neighborhood",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.neighborhood",
+          "elementType": "labels.text.fill",
+          "stylers": [
+              {
+                  "lightness": "0"
+              },
+              {
+                  "saturation": "0"
+              },
+              {
+                  "gamma": "1"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.neighborhood",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+              {
+                  "weight": "0.01"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+              {
+                  "weight": "0.01"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "lightness": "0"
+              },
+              {
+                  "color": "#f6998d"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape.man_made",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "color": "#af967a"
+              },
+              {
+                  "visibility": "on"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape.man_made",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape.natural",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#af967a"
+              },
+              {
+                  "visibility": "on"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape.natural",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "weight": "0"
+              }
+          ]
+      },
+      {
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#ffffff"
+              },
+              {
+                  "lightness": "0"
+              }
+          ]
+      },
+      {
+          "featureType": "poi",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "color": "#af967a"
+              },
+              {
+                  "weight": "5.62"
+              }
+          ]
+      },
+      {
+          "featureType": "poi",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "road",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "gamma": "1"
+              }
+          ]
+      },
+      {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "color": "#1a5691"
+              }
+          ]
+      },
+      {
+          "featureType": "road.highway",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "color": "#af967a"
+              }
+          ]
+      },
+      {
+          "featureType": "road.highway",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "color": "#af967a"
+              },
+              {
+                  "visibility": "on"
+              }
+          ]
+      },
+      {
+          "featureType": "road.highway.controlled_access",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "color": "#baa186"
+              }
+          ]
+      },
+      {
+          "featureType": "road.highway.controlled_access",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "color": "#e6dacd"
+              }
+          ]
+      },
+      {
+          "featureType": "road.arterial",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#d7ccbe"
+              }
+          ]
+      },
+      {
+          "featureType": "road.local",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#d2c8bc"
+              }
+          ]
+      },
+      {
+          "featureType": "transit",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#e5dacf"
+              }
+          ]
+      },
+      {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#8c7358"
+              }
+          ]
+      }
+  ];
+
   $scope.mapOptions = {
     scrollwheel: false,
     streetViewControl: false,
     zoomControl: false,
-    mapTypeControl: false
+    mapTypeControl: false,
+    styles: mapStyles
   };
 
   $scope.pathOptions = {
