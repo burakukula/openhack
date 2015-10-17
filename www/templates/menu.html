@@ -1,33 +1,40 @@
 <ion-view view-title='MENU'>
+  <ion-header-bar class="list-bar">
+    <div class="header-logo">
+      <a nav-direction='exit' href='#/menu'><img class="title-image" src="img/kulturnik-logo-05.svg" /></a>
+    </div>
+    <div class="header-nav">
+      <button class="button button-icon icon ion-navicon" nav-direction='enter' href='#/list-view'></button>
+    </div>
+  </ion-header-bar>
   <ion-content>
-  	<div class="welcome-screen">
-	    <div class="ws-logo">
-	    	<img src="img/kazimir_logo.svg">
-	    	<h3 class="ws-logo-subtitle ws-border-bottom">{{"sub_title" | translate}}</h3>
-	    </div>
-	    <div class="ws-navigation">
-	    	<div class="ws-naviagation-left ws-border-bottom">
-	    		<!-- <a class="ws-button-left" nav-direction='enter' href='#/list-view'></a> -->
-	    		<p class="ws-navigation-header">{{"nav_left" | translate}}</p>
-	    		<p class="ws-navigation-description">{{"discover_past" | translate}}</p>
-	    	</div>
-	    	<div class="ws-naviagation-right ws-border-bottom">
-	    		<p class="ws-navigation-header">{{"nav_right" | translate}}</p>
-	    		<p class="ws-navigation-description">{{"discover_present" | translate}}</p>
-	    		<!-- <a class="ws-button-right" nav-direction='enter' href='#/list-view'></a> -->
-	    	</div>
-	    </div>
-	    <div class="ws-language">
-	    	<!--<p class="ws-navigation-header">{{"language" | translate}}</p> -->
-	    	<div class="ws-language-buttons">
-	    		<button class='button ws-change-language ws-language-en' ng-class="{active: lang == 'en'}" ng-click="setLanguage('en');"><span>eng</span></button>
-	    		<button class='button ws-change-language ws-language-pl' ng-class="{active: lang == 'pl'}" ng-click="setLanguage('pl');"><span>pl</span></button>
-	    	</div>
-	    </div>
-	    <div class="ws-button">
-	    	<a class='button ws-gotit' nav-direction='enter' href='#/list-view'>{{"discover_button" | translate}}</a>
-        <div class="ws-loading-error" ng-if="loadingError">{{"loading_error" | translate}}</div>
-	    </div>
-	</div>
+    <ion-content>
+      <div id="map" data-tap-disabled="true" ng-controller="MapController">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="mapOptions">
+          <ui-gmap-polyline ng-repeat="s in streets" path="s.path" stroke="getStroke(s)" visible="true"></ui-gmap-polyline>
+          <ui-gmap-marker ng-if="userLocation.visible" idKey="userLocation.id"
+              coords="userLocation.coords"
+              options="userLocation.options">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+      <div class="items">
+        <div class="single-item">
+          <h4>Example title</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        </div>
+        <div class="single-item">
+          <h4>Example title</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        </div>
+        <div class="single-item">
+          <h4>Example title</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        </div>
+        <div class="single-item">
+          <h4>Example title</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        </div>
+      </div>
   </ion-content>
 </ion-view>
