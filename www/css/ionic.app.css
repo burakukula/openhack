@@ -7746,14 +7746,26 @@ a.button {
   font-weight: 800;
   font-style: italic; }
 
+.pene {
+  background-color: #f7f7f7; }
+
 .bar .button.button-icon {
   color: #000; }
 
-.items {
-  padding-top: 25%; }
+.item-hour {
+  width: 20%;
+  float: left;
+  padding: 15px; }
+
+.items-list {
+  width: 80%;
+  float: left; }
+
+.items-headline {
+  padding: 20px 15px 0 15px; }
 
 .single-item {
-  padding: 15px 0;
+  padding: 15px 15px 15px 0;
   border-bottom: 1px solid #000; }
 
 .scroll {
@@ -8008,7 +8020,7 @@ a.button {
     background-color: #40a9bc; }
 
 .angular-google-map-container {
-  min-height: 400px;
+  min-height: 200px;
   height: 100%;
   position: absolute;
   top: 0;
